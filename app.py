@@ -1,6 +1,5 @@
 import os
 import streamlit as st
-import streamlit.components.v1 as components
 
 st.set_page_config(
     page_title="Rohini & Anurag's Wedding",
@@ -26,14 +25,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Path to the built index.html
+# Path to built index.html
 INDEX_PATH = os.path.join(os.path.dirname(__file__), "frontend", "dist", "index.html")
 
 if os.path.exists(INDEX_PATH):
     with open(INDEX_PATH, 'r', encoding='utf-8') as f:
         html_data = f.read()
     
-    # Render HTML directly with a set viewport height
-    components.html(html_data, height=2200, scrolling=True)
+    # Updated API call replacing deprecated st.components.v1.html
+    st.html(html_data)
 else:
     st.error("Build file 'frontend/dist/index.html' not found. Please ensure your React build is committed.")
