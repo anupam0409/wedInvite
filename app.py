@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+import streamlit.components.v1 as components
 
 st.set_page_config(
     page_title="Rohini & Anurag's Wedding",
@@ -8,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom styling to strip padding and fill screen
+# Custom CSS to eliminate Streamlit padding
 st.markdown("""
     <style>
         .block-container {
@@ -28,6 +29,7 @@ if os.path.exists(INDEX_PATH):
     with open(INDEX_PATH, 'r', encoding='utf-8') as f:
         html_data = f.read()
     
-    st.html(html_data)
+    # Passing height and scrolling ensures the iframe expands to display the app content
+    components.html(html_data, height=2000, scrolling=True)
 else:
     st.error("Build directory not found. Please ensure 'frontend/dist/index.html' is committed.")
