@@ -8,16 +8,12 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Hide Streamlit UI elements and remove margins
+# Custom styling to strip padding and fill screen
 st.markdown("""
     <style>
         .block-container {
             padding: 0rem !important;
             margin: 0rem !important;
-        }
-        iframe {
-            width: 100% !important;
-            border: none !important;
         }
         header, footer, #MainMenu {
             visibility: hidden;
@@ -25,14 +21,13 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Path to built index.html
+# Build file path
 INDEX_PATH = os.path.join(os.path.dirname(__file__), "frontend", "dist", "index.html")
 
 if os.path.exists(INDEX_PATH):
     with open(INDEX_PATH, 'r', encoding='utf-8') as f:
         html_data = f.read()
     
-    # Updated API call replacing deprecated st.components.v1.html
     st.html(html_data)
 else:
-    st.error("Build file 'frontend/dist/index.html' not found. Please ensure your React build is committed.")
+    st.error("Build directory not found. Please ensure 'frontend/dist/index.html' is committed.")
